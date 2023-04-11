@@ -8,8 +8,8 @@ const mongoose = require('mongoose');
 
 // importing courses router in app from router folder
 const coursesRoutes = require('./api/routes/courses');
-const professor_userRoutes = require('./api/routes/professor');
-const student_userRoutes = require('./api/routes/student');
+const WeeklyCourseRoutes = require('./api/routes/WeeklyCourse');
+const userSignupRoutes = require('./api/routes/Signup')
 
 
 //mongo db connection
@@ -39,8 +39,8 @@ app.use((req, res, next) => {
 //if you create anothor route mension here 
 
 app.use('/courses', coursesRoutes);
-app.use('/professor_user', professor_userRoutes);
-app.use('/student_user', student_userRoutes);
+app.use('/weeklyCourse', WeeklyCourseRoutes);
+app.use('/Signup', userSignupRoutes);
 
 
 // For error handling
