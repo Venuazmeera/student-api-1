@@ -3,11 +3,12 @@
 const mongoose = require('mongoose');
 
 const CourseContentSchema = new mongoose.Schema({
+    _id: mongoose.Schema.Types.ObjectId,
     week: { type:String },
     readingmeterial: { type: String },
     assignment: { type:String },
     additionalContent: { type: String },
-    annoncement: { type:String },
+    announcement: { type:String },
     startDate: { type: String, required: true },
     endDate: { type:String, required:true }
 });
