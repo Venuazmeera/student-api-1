@@ -123,47 +123,13 @@ router.post('/addWeek', (req, res, next) =>{
  
 //  });
 
-//gpt
-// router.patch('/updateWeek/:weekId', (req, res, next) => {
-//     const weekId = req.params.weekId;
-//     const updateOps = {};
-//     for (const key in req.body) {
-//       updateOps[`CourseContent.$.${key}`] = req.body[key];
-//     }
-//     WeeklyCourse.findOneAndUpdate(
-//       { "CourseContent._id": weekId },
-//       { $set: updateOps },
-//       { new: true }
-//     )
 
-//     .exec()
-//     .then(updatedWeek => {
-//       if (updatedWeek) {
-//         res.status(200).json({
-//           message: 'Weekly course updated successfully',
-//           data: updatedWeek
-//         });
-//         console.log(updatedWeek)
-//       } else {
-//         res.status(404).json({
-//           message: 'No weekly course found with the given ID'
-//         });
-//       }
-//     })
-//     .catch(error => {
-//       res.status(500).json({
-//         message: 'Failed to update weekly course',
-//         error: error
-//       });
-//     });
-//   });
-  
-
-//put method which gpt given it is working
+//put method is working
 
 router.put('/updateWeek/:id', (req, res, next) => {
     const weekId = req.params.id;
     const update = {
+      _id: new mongoose.Types.ObjectId(),
       week: req.body.week,
       readingmeterial: req.body.readingmeterial,
       assignment: req.body.assignment,
@@ -198,33 +164,69 @@ router.put('/updateWeek/:id', (req, res, next) => {
       });
     });
   });
+ //this is working 
+// router.delete('/deleteWeek/:weekId', (req, res, next) => {
+//     const { weekId } = req.params;
   
-//delete method for week content which is in an array
+//     WeeklyCourse.updateOne(
+//       { "CourseContent._id": weekId },
+//       { $pull: { CourseContent: { _id: weekId } } },
+//       { new: true }
+//     )
+//       .exec()
+//       .then((doc) => {
+//         if (doc) {
+//           res.status(200).json({
+//             message: 'Weekly Course deleted successfully',
+//             data: doc,
+//           });
+//         } else {
+//           res.status(404).json({
+//             message: 'Weekly Course not found',
+//           });
+//         }
+//       })
+//       .catch((err) => {
+//         console.error(err);
+//         res.status(500).json({
+//           message: 'Server Error',
+//           error: err,
+//         });
+//       });
+//   });
 
-router.delete('/:id/:weekId', (req, res, next) => {
-    WeeklyCourse.updateOne(
-      { _id: req.params.id },
-      { $pull: { CourseContent: { _id: req.params.weekId } } }
-    )
-    .then(result => {
-      if (result.nModified > 0) {
+router.delete('/deleteWeek/:weekId', (req, res, next) => {
+  const  weekId = req.params.weekId;
+  console.log(weekId)
+  const convertedId = mongoose.Types.ObjectId(weekId);
+
+  WeeklyCourse.updateOne(
+    { "CourseContent._id": convertedId },
+    { $pull: { CourseContent: { _id: convertedId } } },
+    { new: true }
+  )
+    .exec()
+    .then((doc) => {
+      if (doc) {
         res.status(200).json({
-          message: "Week deleted successfully",
-          result: result
+          message: 'Weekly Course deleted successfully',
+          data: doc,
         });
       } else {
         res.status(404).json({
-          message: "Week not found"
+          message: 'Weekly Course not found',
         });
       }
     })
-    .catch(error => {
+    .catch((err) => {
+      console.error(err);
       res.status(500).json({
-        message: "An error occurred",
-        error: error
+        message: 'Server Error',
+        error: err,
       });
     });
-  });
+});
+  
   //to get single course with ID
 router.get('/:w_courseId',(req, res, next) => {
     const id = req.params.w_courseId;

@@ -2,6 +2,7 @@
   "name": "student-api",
   "version": "1.0.0",
   "description": "student api project which is very helpfull for students to connect with professors and other students",
+  
   "scripts": {
     "test": "npm test",
     "start": "nodemon server.js"
@@ -28,6 +29,8 @@
     "nodemon": "^2.0.20"
   },
   "dependencies": {
-    "bcrypt": "^5.1.0"
+    "api": "^5.0.8",
+    "bcrypt": "^5.1.0",
+    "cors": "^2.8.5"
   }
 }

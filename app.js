@@ -4,12 +4,14 @@ const app = express();
 const morgan = require('morgan'); //morgan is for next function we are using in our routes after req,res,next
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+const cors = require('cors');
 
 
 // importing courses router in app from router folder
 const coursesRoutes = require('./api/routes/courses');
 const WeeklyCourseRoutes = require('./api/routes/WeeklyCourse');
-const userSignupRoutes = require('./api/routes/Signup')
+const userSignupRoutes = require('./api/routes/Signup');
+const sendNotificationsRoutes = require('./api/routes/sendNotifications');
 
 
 //mongo db connection
@@ -19,6 +21,8 @@ mongoose.connect('mongodb+srv://venuazmeera:mongo_venu69@cluster0.7ewrhqm.mongod
 app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
+app.use(cors());
+// app.use(Onesignal);
 
 
 //for not getting cores errors
@@ -41,6 +45,7 @@ app.use((req, res, next) => {
 app.use('/courses', coursesRoutes);
 app.use('/weeklyCourse', WeeklyCourseRoutes);
 app.use('/Signup', userSignupRoutes);
+app.use('/notifications', sendNotificationsRoutes);
 
 
 // For error handling
