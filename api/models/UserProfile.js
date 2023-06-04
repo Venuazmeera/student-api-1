@@ -22,7 +22,9 @@ const UserProfileSchema = mongoose.Schema({
 //    address:  subObj,
    firstName:  {type:String, required: true},
    lastName:  {type:String, required: true},
-   
+   role: {type:String, required: true},
+   school: {type: String, required: true},
+   emergency: { type: Number, required: true}
 });
 
 

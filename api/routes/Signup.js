@@ -7,6 +7,7 @@ const mongoose = require("mongoose");
 
 //import the schema here
 const UserSignup = require('../models/UserProfile');
+const UserProfile = require("../models/UserProfile");
 
 
 
@@ -23,7 +24,10 @@ router.post('/', (req, res, next)=>{
         mobileNo: req.body.mobileNo,
         //address:  req.body.address,
         firstName: req.body.firstName,
-        lastName: req.body.lastName
+        lastName: req.body.lastName,
+        role: req.body.role,
+        school: req.body.school,
+        emergency: req.body.emergency
 
            });
 
@@ -37,10 +41,13 @@ router.post('/', (req, res, next)=>{
     if(doc == null){
 
         userSignup.save().then( result=> {
+            console.log(result);
+
             res.status(200).json({
                message: "User signed up susccessfully",
                status:"success",
-               Id: result._id
+               Id: result._id,
+               userData: result
             });
   
      }) .catch(err => {
@@ -78,6 +85,45 @@ router.post('/', (req, res, next)=>{
 
 
 });
+
+// router.put('/:username', (req, res, next)=> {
+//     const userId = req.params.id;
+//     const update = {
+//       _id: new mongoose.Types.ObjectId(),
+//       school: req.body.school,
+//       firstName: req.body.firstName,
+//       lastName: req.body.lastName,
+//       mobileNo: req.body.mobileNo,
+//       emergency: req.body.emergency
+      
+//     };
+//     UserProfile.findOneAndUpdate(
+//       { "UserProfile._id": userId },
+//       { $set: { "UserProfile.$": update } },
+//       { new: true }
+//     )
+//     .select()
+//     .exec()
+//     .then(updatedDoc => {
+//       if (updatedDoc) {
+//         res.status(200).json({
+//           message: "user updated successfully",
+//           data: updatedDoc
+//         });
+//       } else {
+//         res.status(404).json({
+//           message: "user not found"
+//         });
+//       }
+//     })
+//     .catch(err => {
+//       res.status(500).json({
+//         message: "Failed to update user",
+//         error: err
+//       });
+//     });
+// })
+
  
 
 
@@ -96,6 +142,7 @@ router.post('/login', (req, res, next)=>{
     console.log(username)
     var user  = req.body.username;
     var pass  = req.body.password;
+    // var role = req.body.role;
 
 
    
@@ -104,6 +151,16 @@ router.post('/login', (req, res, next)=>{
         
      // res.status(200).json({Authentication: doc._id})
       res.status(200).json({Authentication: doc._id,
+        userData: doc,
+        // added role for role based navigation
+        role: doc.role,
+        username: doc.username,
+        school: doc.school,
+        firstName: doc.firstName,
+        lastName: doc.lastName,
+        mobileNo: doc.mobileNo,
+        emergency: doc.emergency,
+
                              message: "Success"})
     }
     else
@@ -138,7 +195,9 @@ router.get('/:username', (req, res, next) =>{
             FirstName: doc.firstName,
             lastName: doc.lastName,
             mobileno: doc.mobileNo,
-            address: doc.address
+            school: doc.school,
+            emergency: doc.emergency,
+            //address: doc.address
            });
  
     })
@@ -152,7 +211,38 @@ router.get('/:username', (req, res, next) =>{
      
  });
  
-
+ router.put('/:username', (req, res, next) => {
+    const username = req.params.username;
+    const updateFields = req.body; // Assuming the updated fields are sent in the request body
+    
+    UserSignup.findOneAndUpdate({ username: username }, updateFields, { new: true })
+      .exec()
+      .then(updatedDoc => {
+        if (!updatedDoc) {
+          return res.status(404).json({
+            message: 'Profile not found'
+          });
+        }
+        
+        res.status(200).json({
+          message: 'Profile updated successfully',
+          updatedProfile: updatedDoc,
+          school: doc.school,
+          firstName: doc.firstName,
+          lastName: doc.lastName,
+          mobileNo: doc.mobileNo,
+          emergency: doc.emergency,
+        });
+      })
+      .catch(err => {
+        console.error(err);
+        res.status(500).json({
+          error: err,
+          message: 'An error occurred while updating the profile'
+        });
+      });
+  });
+  
 
 
 
