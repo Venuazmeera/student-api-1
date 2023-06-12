@@ -1,8 +1,7 @@
 const express = require('express');  
 const router = express.Router();
 const mongoose = require('mongoose');
-const todomodel = require('../models/todo')
-
+const todomodel = require('../models/todo');
 
 //search router
 
