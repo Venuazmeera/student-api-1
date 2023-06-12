@@ -227,11 +227,11 @@ router.get('/:username', (req, res, next) =>{
         res.status(200).json({
           message: 'Profile updated successfully',
           updatedProfile: updatedDoc,
-          school: doc.school,
-          firstName: doc.firstName,
-          lastName: doc.lastName,
-          mobileNo: doc.mobileNo,
-          emergency: doc.emergency,
+          school: updatedDoc.school,
+          firstName: updatedDoc.firstName,
+          lastName: updatedDoc.lastName,
+          mobileNo: updatedDoc.mobileNo,
+          emergency: updatedDoc.emergency,
         });
       })
       .catch(err => {

@@ -12,7 +12,8 @@ const coursesRoutes = require('./api/routes/courses');
 const WeeklyCourseRoutes = require('./api/routes/WeeklyCourse');
 const userSignupRoutes = require('./api/routes/Signup');
 const sendNotificationsRoutes = require('./api/routes/sendNotifications');
-
+const todoRoutes = require('./api/routes/todo');
+const blogRoutes = require('./api/routes/blog');
 
 //mongo db connection
 mongoose.connect('mongodb+srv://venuazmeera:mongo_venu69@cluster0.7ewrhqm.mongodb.net/?retryWrites=true&w=majority');
@@ -46,6 +47,8 @@ app.use('/courses', coursesRoutes);
 app.use('/weeklyCourse', WeeklyCourseRoutes);
 app.use('/Signup', userSignupRoutes);
 app.use('/notifications', sendNotificationsRoutes);
+app.use('/todo', todoRoutes);
+app.use('/blog', blogRoutes);
 
 
 // For error handling

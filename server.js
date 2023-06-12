@@ -6,7 +6,7 @@ const port = process.env.PORT || 3000;
 
 const server = http.createServer(app);
 
-server.listen(port);
+server.listen(port, () => console.log('Listening to port 3000'));
 
 /*require('dotenv').config();
 const mongoose = require('mongoose');
