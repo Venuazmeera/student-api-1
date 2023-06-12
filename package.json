@@ -2,7 +2,7 @@
   "name": "student-api",
   "version": "1.0.0",
   "description": "student api project which is very helpfull for students to connect with professors and other students",
-  "main": "index.js",
+  "main": "index.js", "type": "module",
   "engines": {
     "node": "18.x"
   },
