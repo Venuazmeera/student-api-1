@@ -2,13 +2,13 @@
   "name": "student-api",
   "version": "1.0.0",
   "description": "student api project which is very helpfull for students to connect with professors and other students",
-  "main": "server.js",
+  "main": "index.js",
   "engines": {
     "node": "18.x"
   },
   "scripts": {
     "test": "npm test",
-    "start": "nodemon server.js"
+    "start": "nodemon index.js"
   },
   "repository": {
     "type": "git",
