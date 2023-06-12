@@ -40,6 +40,11 @@ app.use((req, res, next) => {
     next();
 });
 
+
+//for showing massage in vercel
+app.use("/", (req, res, next)=>{
+    res.json({ message: "Hello from express app"})
+});
 //routes which should handle requests 
 //if you create anothor route mension here 
 
