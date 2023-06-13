@@ -9,12 +9,12 @@ const cors = require('cors');
 //"main": "index.js", package.json file
 
 // importing courses router in app from router folder
-const coursesRoutes = require('./api/routes/courses');
-const WeeklyCourseRoutes = require('./api/routes/WeeklyCourse');
-const userSignupRoutes = require('./api/routes/Signup');
-const sendNotificationsRoutes = require('./api/routes/sendNotifications');
-const todoRoutes = require('./api/routes/todo');
-const blogRoutes = require('./api/routes/blog');
+const coursesRoutes = require('./routes/courses');
+const WeeklyCourseRoutes = require('./routes/WeeklyCourse');
+const userSignupRoutes = require('./routes/Signup');
+const sendNotificationsRoutes = require('./routes/sendNotifications');
+const todoRoutes = require('./routes/todo');
+const blogRoutes = require('./routes/blog');
 
 //mongo db connection
 mongoose.connect('mongodb+srv://venuazmeera:mongo_venu69@cluster0.7ewrhqm.mongodb.net/?retryWrites=true&w=majority');
