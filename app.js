@@ -6,6 +6,7 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const cors = require('cors');
 
+//"main": "index.js", package.json file
 
 // importing courses router in app from router folder
 const coursesRoutes = require('./api/routes/courses');
